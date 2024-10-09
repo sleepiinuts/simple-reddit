@@ -1,0 +1,28 @@
+<div class="container">
+  <mat-grid-list cols="3" rowHeight="4rem">
+    <mat-grid-tile colspan="1" rowspan="2"
+      ><div class="score">
+        <div class="number">1</div>
+        <div class="unit">POINTS</div>
+      </div></mat-grid-tile
+    >
+    <mat-grid-tile colspan="2" rowspan="1"
+      ><div id="header">
+        <h6>Angular Book</h6>
+        <p>(angular.io)</p>
+      </div></mat-grid-tile
+    >
+    <mat-grid-tile #footer colspan="2" rowspan="1"
+      ><div id="footer">
+        <button mat-button>
+          <mat-icon>thumb_up</mat-icon>
+          upvote
+        </button>
+        <button mat-button>
+          <mat-icon>thumb_down</mat-icon>
+          downvote
+        </button>
+      </div></mat-grid-tile
+    >
+  </mat-grid-list>
+</div>
