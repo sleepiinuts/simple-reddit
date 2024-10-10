@@ -1,5 +1,6 @@
 export interface Article {
-  point: number;
+  id: number;
   title: string;
   url: string;
+  point: number;
 }
