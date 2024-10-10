@@ -6,6 +6,7 @@
 }
 mat-grid-list {
   background-color: #f2efe5;
+  margin-bottom: var(--main-margin);
 }
 
 .score {

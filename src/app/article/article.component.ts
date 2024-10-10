@@ -1,14 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
-export interface Tile {
-  color: string;
-  cols: number;
-  rows: number;
-  text: string;
-}
+import { ArticleService } from './article.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Article } from '../models/articles';
 
 @Component({
   selector: 'app-article',
@@ -17,9 +13,19 @@ export interface Tile {
   templateUrl: './article.component.html',
   styleUrl: './article.component.css',
 })
-export class ArticleComponent {
-  tiles: Tile[] = [
-    { text: 'One', cols: 1, rows: 1, color: 'lightblue' },
-    { text: 'Two', cols: 1, rows: 2, color: 'lightgreen' },
-  ];
+export class ArticleComponent implements OnInit {
+  articles = <Article[]>[];
+
+  constructor(private articleServ: ArticleService) {
+    this.articleServ
+      .getAll()
+      .pipe(takeUntilDestroyed())
+      .subscribe((articles) => {
+        this.articles = articles;
+      });
+  }
+
+  ngOnInit(): void {
+    // this.articleServ.getAll();
+  }
 }
