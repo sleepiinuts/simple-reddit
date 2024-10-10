@@ -1,0 +1,16 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "Angular Book",
+      "url": "(angular.io)",
+      "point": 4
+    },
+    {
+      "id": 2,
+      "title": "One Piece",
+      "url": "(sritown.net)",
+      "point": 10
+    }
+  ]
+}
