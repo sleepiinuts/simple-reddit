@@ -16,6 +16,6 @@ export const reducer = createReducer(
   initialState,
   on(ArticleActions.getAllSuccess, (state, { data }) => ({
     ...state,
-    articles: [...data],
+    articles: data?.length > 0 ? [...data] : <Article[]>[],
   }))
 );
