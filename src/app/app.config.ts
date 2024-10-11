@@ -1,10 +1,10 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
-  provideZoneChangeDetection,
+  provideZoneChangeDetection, isDevMode,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -13,6 +13,7 @@ import { provideStore } from '@ngrx/store';
 import { provideState } from '@ngrx/store';
 import { articleFeatureKey, reducer } from './states/article/article.reducer';
 import { provideRouterStore } from '@ngrx/router-store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideState({ name: articleFeatureKey, reducer: reducer }),
     provideRouterStore(),
-    provideHttpClient(),
-  ],
+    provideHttpClient(withFetch()),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
+],
 };
