@@ -9,7 +9,7 @@ import { catchError, Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class ArticleService {
-  static readonly url = 'http://localhost:3000/articles';
+  static readonly url = 'http://localhost:8080/articles';
   constructor(
     private store: Store<{ articles: Article[] }>,
     private httpClient: HttpClient
