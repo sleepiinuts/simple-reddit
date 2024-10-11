@@ -15,9 +15,12 @@ export class ArticleService {
     private httpClient: HttpClient
   ) {}
 
-  getAll(): Observable<Article[]> {
+  getAll() {
     return this.httpClient
       .get<Article[]>(ArticleService.url)
-      .pipe(catchError((err) => of(err)));
+      .pipe(catchError((err) => of(err)))
+      .subscribe((articles) => {
+        this.store.dispatch(ArticleActions.getAllSuccess({ data: articles }));
+      });
   }
 }

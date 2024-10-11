@@ -6,8 +6,7 @@ import { ArticleService } from './article.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Article } from '../models/articles';
 import { Store } from '@ngrx/store';
-import { ArticleActions } from '../states/article/article.actions';
-import { articleFeatureKey } from '../states/article/article.reducer';
+import { articleFeatureKey, State } from '../states/article/article.reducer';
 
 @Component({
   selector: 'app-article',
@@ -21,21 +20,13 @@ export class ArticleComponent implements OnInit {
 
   constructor(
     private articleServ: ArticleService,
-    private store: Store<{ articles: Article[] }>
+    private store: Store<{ articles: State }>
   ) {
-    this.articleServ
-      .getAll()
-      .pipe(takeUntilDestroyed())
-      .subscribe((articles) => {
-        this.articles = articles;
-      });
-
-    this.store.dispatch(ArticleActions.getAllSuccess({ data: this.articles }));
     this.store
       .select(articleFeatureKey)
-      .subscribe((articles) =>
-        console.log('statezz: ', JSON.stringify(articles))
-      );
+      .pipe(takeUntilDestroyed())
+      .subscribe((state) => (this.articles = state.articles));
+    this.articleServ.getAll();
   }
 
   ngOnInit(): void {
