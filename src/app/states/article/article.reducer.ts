@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { ArticleActions } from './article.actions';
 import { Article } from '../../models/articles';
 
-export const articleFeatureKey = 'article';
+export const articleFeatureKey = 'articles';
 
 export interface State {
   articles: Article[];

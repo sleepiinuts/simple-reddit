@@ -16,7 +16,6 @@ export class ArticleService {
   ) {}
 
   getAll(): Observable<Article[]> {
-    this.store.dispatch(ArticleActions.getAllSuccess({ data: [] }));
     return this.httpClient
       .get<Article[]>(ArticleService.url)
       .pipe(catchError((err) => of(err)));
