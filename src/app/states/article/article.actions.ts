@@ -7,6 +7,8 @@ export const ArticleActions = createActionGroup({
     'Get All': emptyProps(),
     'Get All Success': props<{ data: Article[] }>(),
     'Get All Failure': props<{ error: unknown }>(),
+    'New Article': props<{ data: Article }>(),
+    'New Article Failure': props<{ error: unknown }>(),
   },
 });
 

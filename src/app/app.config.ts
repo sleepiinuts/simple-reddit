@@ -1,7 +1,8 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
-  provideZoneChangeDetection, isDevMode,
+  provideZoneChangeDetection,
+  isDevMode,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
@@ -14,6 +15,8 @@ import { provideState } from '@ngrx/store';
 import { articleFeatureKey, reducer } from './states/article/article.reducer';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideEffects } from '@ngrx/effects';
+import { ArticleEffects } from './article/article.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,8 +26,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideStore(),
     provideState({ name: articleFeatureKey, reducer: reducer }),
+    provideEffects(ArticleEffects),
     provideRouterStore(),
     provideHttpClient(withFetch()),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
-],
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+  ],
 };
