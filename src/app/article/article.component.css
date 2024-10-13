@@ -38,7 +38,17 @@ mat-grid-list {
 #header h6 {
   margin-top: var(--main-margin);
   margin-bottom: 0px;
+  display: inline;
 }
+#header mat-icon {
+  float: right;
+  margin: var(--main-margin);
+}
+
+#header mat-icon:hover {
+  cursor: pointer;
+}
+
 #header p {
   font-size: 0.8rem;
   color: #abb2b9;

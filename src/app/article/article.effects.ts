@@ -31,4 +31,46 @@ export class ArticleEffects {
       )
     );
   });
+
+  getAll = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticleActions.getAll),
+      exhaustMap(() =>
+        this.httpClient.get<Article[]>(ArticleEffects.url).pipe(
+          map((articles) => ArticleActions.getAllSuccess({ data: articles })),
+          catchError(() => of(ArticleActions.getAllFailure))
+        )
+      )
+    );
+  });
+
+  deleteById = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticleActions.deleteArticle),
+      exhaustMap((props) =>
+        this.httpClient.delete(`${ArticleEffects.url}/${props.data}`).pipe(
+          map(() => ArticleActions.getAll()),
+          catchError(() => of(ArticleActions.deleteArticleFailure))
+        )
+      )
+    );
+  });
+
+  vote = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticleActions.voteArticle),
+      exhaustMap((props) =>
+        this.httpClient
+          .patch(
+            `${ArticleEffects.url}/${props.data.id}`,
+            props.data.vote,
+            this.httpOptions
+          )
+          .pipe(
+            map(() => ArticleActions.getAll()),
+            catchError(() => of(ArticleActions.voteArticleFailure))
+          )
+      )
+    );
+  });
 }

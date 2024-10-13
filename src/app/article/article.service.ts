@@ -15,6 +15,7 @@ export class ArticleService {
     private httpClient: HttpClient
   ) {}
 
+  // TO-FIX: move to effect and dispatch event getAllSUccess properly!
   getAll() {
     return this.httpClient
       .get<Article[]>(ArticleService.url)

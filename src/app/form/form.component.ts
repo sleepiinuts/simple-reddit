@@ -42,5 +42,8 @@ export class FormComponent {
     };
 
     this.store.dispatch(ArticleActions.newArticle({ data: article }));
+
+    // reset form value
+    this.subForm.reset();
   }
 }

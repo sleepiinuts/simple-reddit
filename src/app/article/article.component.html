@@ -10,16 +10,17 @@
     <mat-grid-tile colspan="2" rowspan="1"
       ><div id="header">
         <h6>{{ article.title }}</h6>
+        <mat-icon (click)="deleteArticle(article.id)">delete_outline</mat-icon>
         <p>{{ article.url }}</p>
       </div></mat-grid-tile
     >
     <mat-grid-tile #footer colspan="2" rowspan="1"
       ><div id="footer">
-        <button mat-button>
+        <button mat-button (click)="vote(article.id, 1)">
           <mat-icon>thumb_up</mat-icon>
           upvote
         </button>
-        <button mat-button>
+        <button mat-button (click)="vote(article.id, -1)">
           <mat-icon>thumb_down</mat-icon>
           downvote
         </button>
